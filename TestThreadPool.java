@@ -1,7 +1,7 @@
 import java.util.concurrent.ExecutorService;  
 import java.util.concurrent.Executors;  
 
-public class TestThreadPool {
+public class SynchronizedTestThreadPool {
     
     static class WorkerThread implements Runnable {  
         private String message;  
@@ -9,14 +9,18 @@ public class TestThreadPool {
             this.message=s;  
         }  
          public void run() {  
+             WorkerThread.performActions(this.message);
+        } 
+        public synchronized void performActions(String message) {
             System.out.println(Thread.currentThread().getName()+" (Start) message = "+message);  
             try {  
                     Thread.sleep(2000); 
                 } catch (InterruptedException e) { 
                     e.printStackTrace(); 
                 } 
-            System.out.println(Thread.currentThread().getName()+" (End)"); 
-        }  
+            System.out.println(Thread.currentThread().getName()+" (End) message = "+message); 
+
+        }
     }  
     
      public static void main(String[] args) {  
