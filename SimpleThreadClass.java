@@ -7,3 +7,4 @@ public class SimpleThreadClass {
       });
       th.start();
     }
+}
